@@ -23,6 +23,23 @@ class TeacherController {
     }
   }
 
+  // [GET] /teacher/full/:id
+  async getFullDataByID(req, res) {
+    try {
+      const teacherId = req.params.id;
+      const teacher = await Teacher.findById(teacherId).populate("user_id");
+
+      if (!teacher) {
+        return res.status(404).json({ error: "Teacher not found" });
+      }
+
+      res.status(200).json({ message: "success", data: teacher });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: "Error when querying Teacher table." });
+    }
+  }
+
   // [POST] /teacher/create
   async create(req, res) {
     try {
