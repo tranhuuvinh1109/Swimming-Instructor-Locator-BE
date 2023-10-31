@@ -5,7 +5,8 @@ const Student = new Schema(
   {
     user_id: { type: Schema.Types.ObjectId, ref: "User" },
     student_name: { type: String, required: true },
-    description: { type: String, default: "" },
+    weight: { type: Number, required: true, default: 0 },
+    height: { type: Number, required: true, default: 0 },
   },
   {
     timestamps: true,
