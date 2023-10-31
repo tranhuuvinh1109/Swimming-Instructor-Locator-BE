@@ -11,8 +11,6 @@ const User = new Schema(
     address: { type: String, default: "" },
     phone: { type: String, default: "" },
     type: { type: Number, default: 0 },
-    weight: { type: Number, default: 0 },
-    height: { type: Number, default: 0 },
   },
   {
     timestamps: true,
