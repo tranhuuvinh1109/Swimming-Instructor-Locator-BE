@@ -3,8 +3,8 @@ const Schema = mongoose.Schema;
 
 const RegisterStudy = new Schema(
   {
-    course_id: { type: Schema.Types.ObjectId, ref: "Course" },
-    user_id: { type: Schema.Types.ObjectId, ref: "User" },
+    center_id: { type: Schema.Types.ObjectId, ref: "Center" },
+    student_id: { type: Schema.Types.ObjectId, ref: "Student" },
     pay: { type: Boolean, default: false },
   },
   {

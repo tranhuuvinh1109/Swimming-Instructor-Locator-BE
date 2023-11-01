@@ -9,7 +9,7 @@ const Center = new Schema(
     address: { type: String, required: true },
     description: { type: String, required: true },
     image: { type: String, required: true },
-    phone_number: { type: Number, required: true },
+    phone_number: { type: String, required: true },
   },
   {
     timestamps: true,

@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Teacher = require("../models/Teacher");
 
 class AuthController {
   // [POST] /auth/login
@@ -38,7 +39,32 @@ class AuthController {
 
       const newUser = new User(req.body);
       await newUser.save();
-      res.status(201).json({ message: "Registration successful" });
+      const { teacher_name } = req.body;
+      const newTeacher = new Teacher({
+        user_id: newUser._id,
+        teacher_name: teacher_name,
+      });
+
+      await newTeacher.save();
+      const result = await User.aggregate([
+        {
+          $match: {
+            _id: newUser._id,
+          },
+        },
+        {
+          $lookup: {
+            from: "teachers",
+            localField: "_id",
+            foreignField: "user_id",
+            as: "teacher_info",
+          },
+        },
+      ]);
+
+      res
+        .status(200)
+        .json({ message: "Registration successful", data: result });
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Registration failed" });
